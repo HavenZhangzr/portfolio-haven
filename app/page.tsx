@@ -342,7 +342,7 @@ export default function Home() {
         <section id="projects" className="border-b border-white/10 py-16">
           <SectionHeading
             label="Featured Projects"
-            title="A quick project overview layer for recruiters to scan, then click deeper."
+            title="Selected work that connects clean UI, backend systems, and real user needs."
           />
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {projects.map((project, index) => (
