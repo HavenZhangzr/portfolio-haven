@@ -43,7 +43,7 @@ export const projects: Project[] = [
     overview: "This project focuses on turning a safety-critical document workflow into a cleaner digital product. The app helps teams build a fall protection plan step by step, review the generated result, share it with stakeholders, and complete the sign-off flow with less friction.",
     role: ["Full-Stack Developer", "Product Designer"],
     stack: ["React Native", "Expo", "Node.js", "Express", "MongoDB", "SQLite"],
-    duration: "Professional project",
+    duration: "Jan 2026 – Apr 2026",
     accent: "from-emerald-300/65 via-cyan-300/55 to-sky-300/55",
     previewImage: "/FPP/fpp.png",
     screenshots: [
@@ -131,7 +131,7 @@ export const projects: Project[] = [
     overview: "PathPal is a community discovery web app that helps users share updates, explore nearby places, and interact around local experiences. It combines real-time posting, map-based discovery, and lightweight social features in a browser-based product experience.",
     role: ["Full-Stack Developer", "Product Designer"],
     stack: ["HTML", "JS", "Express", "Node.js", "MongoDB"],
-    duration: "Jan 2025 - Apr 2025",
+    duration: "Apr 2025 – May 2025",
     accent: "from-violet-300/75 via-blue-300/50 to-cyan-300/60",
     previewImage: "/pathPal/pathPal.png",
     screenshots: [
