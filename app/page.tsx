@@ -339,7 +339,7 @@ export default function Home() {
               <div className="absolute inset-7 rounded-full bg-violet-300/18 blur-2xl" />
               <div className="relative size-72 overflow-hidden rounded-full border border-white/15 bg-white/[0.04] shadow-[0_0_40px_rgba(168,139,250,0.18)] sm:size-80">
                 <Image
-                  src="/avatar2.jpg"
+                  src="/avatar2.png"
                   alt="Haven Zhang portrait"
                   fill
                   priority
