@@ -2,10 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import {
   ArrowRight,
   ArrowUpRight,
+  Braces,
   BriefcaseBusiness,
+  Database,
+  Download,
   Github,
   GraduationCap,
   Linkedin,
@@ -14,6 +18,16 @@ import {
   Monitor,
   ShieldCheck
 } from "lucide-react";
+import {
+  SiDocker,
+  SiDotnet,
+  SiGit,
+  SiMongodb,
+  SiNodedotjs,
+  SiReact
+} from "react-icons/si";
+import { GrOracle } from "react-icons/gr";
+import { TbLambda } from "react-icons/tb";
 import { motion } from "framer-motion";
 import { projects } from "@/lib/projects";
 
@@ -27,15 +41,38 @@ const heroHighlights = [
   "Database-Driven Applications"
 ];
 
-const skills = [
-  "React",
-  "React Native",
-  "Node.js",
-  ".NET",
-  "SQL",
-  "MongoDB",
-  "Oracle",
-  "Git"
+const skillGroups = [
+  {
+    category: "Frontend",
+    skills: [
+      { name: "React", icon: SiReact, color: "text-[#61dafb]" },
+      { name: "React Native", icon: SiReact, color: "text-[#61dafb]" }
+    ]
+  },
+  {
+    category: "Backend",
+    skills: [
+      { name: ".NET", icon: SiDotnet, color: "text-[#8b7cf6]" },
+      { name: "Node.js", icon: SiNodedotjs, color: "text-[#5fa04e]" },
+      { name: "REST APIs", icon: Braces, color: "text-violet-300" }
+    ]
+  },
+  {
+    category: "Database",
+    skills: [
+      { name: "Oracle", icon: GrOracle, color: "text-[#f80000]" },
+      { name: "MongoDB", icon: SiMongodb, color: "text-[#47a248]" },
+      { name: "SQL", icon: Database, color: "text-sky-300" }
+    ]
+  },
+  {
+    category: "Cloud & Tools",
+    skills: [
+      { name: "Docker", icon: SiDocker, color: "text-[#2496ed]" },
+      { name: "AWS Lambda", icon: TbLambda, color: "text-[#ff9900]" },
+      { name: "Git", icon: SiGit, color: "text-[#f05032]" }
+    ]
+  }
 ];
 
 const aboutHighlights = [
@@ -59,10 +96,10 @@ const aboutHighlights = [
 const experience = [
   {
     title: "Freelance Studio",
-    place: "Full-Stack Development",
+    place: "Founding Team Member",
     period: "Now",
     icon: BriefcaseBusiness,
-    detail: "Collaborating on modern web applications, UI systems, and scalable products through freelance and team-based projects.",
+    detail: "Collaborating on modern web applications, portfolio projects, and client-ready solutions.",
     image: "/SFS.jpg",
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Firebase"],
     linkLabel: "Visit Studio",
@@ -163,13 +200,51 @@ function ProjectPreview({
 }
 
 export default function Home() {
+  const [activeSection, setActiveSection] = useState("home");
+
+  useEffect(() => {
+    const updateActiveSection = () => {
+      const isAtPageBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 2;
+
+      if (isAtPageBottom) {
+        setActiveSection("contact");
+        return;
+      }
+
+      const marker = window.scrollY + 128;
+      let currentSection = "home";
+
+      for (const item of navItems) {
+        const sectionId = item.toLowerCase();
+        const section = document.getElementById(sectionId);
+
+        if (section && section.offsetTop <= marker) {
+          currentSection = sectionId;
+        }
+      }
+
+      setActiveSection(currentSection);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+    };
+  }, []);
+
   return (
-    <main className="relative min-h-screen overflow-hidden">
+    <main className="relative min-h-screen overflow-clip">
       <div className="noise pointer-events-none absolute inset-0 opacity-60" />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
 
       <div className="relative z-10 mx-auto max-w-6xl px-5 sm:px-8">
-        <header className="flex items-center justify-between py-7">
+        <header className="sticky top-0 z-50 -mx-5 flex items-center justify-between border-b border-white/10 bg-[#0b0c11]/85 px-5 py-7 shadow-[0_8px_30px_rgba(0,0,0,0.18)] backdrop-blur-xl sm:-mx-8 sm:px-8">
           <a href="#home" className="text-2xl font-bold tracking-tight text-white">
             H.Zhang
           </a>
@@ -179,7 +254,9 @@ export default function Home() {
                 key={item}
                 href={`#${item.toLowerCase()}`}
                 className={`transition hover:text-violet-200 ${
-                  item === "Home" ? "text-violet-200 underline decoration-violet-300/60 underline-offset-8" : ""
+                  activeSection === item.toLowerCase()
+                    ? "text-violet-200 underline decoration-violet-300/60 underline-offset-8"
+                    : ""
                 }`}
               >
                 {item}
@@ -187,17 +264,19 @@ export default function Home() {
             ))}
           </nav>
           <a
-            href="https://github.com/HavenZhangzr"
-            aria-label="GitHub"
+            href="https://www.linkedin.com/in/haven-zhang"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
             className="grid size-9 place-items-center rounded-full border border-white/12 bg-white/[0.04] text-white/72 transition hover:border-white/28 hover:text-white"
           >
-            <Github size={17} />
+            <Linkedin size={17} />
           </a>
         </header>
 
         <section
           id="home"
-          className="grid min-h-[calc(100vh-9rem)] items-start gap-12 border-b border-white/10 pb-14 pt-10 md:grid-cols-[1fr_0.86fr] md:pt-14"
+          className="section-surface grid min-h-[calc(100vh-9rem)] items-start gap-12 border-b border-white/10 pb-14 pt-10 [--section-bg:rgba(15,17,21,0.72)] md:grid-cols-[1fr_0.86fr] md:pt-14"
         >
           <motion.div
             initial={{ opacity: 0, y: 26 }}
@@ -209,11 +288,11 @@ export default function Home() {
               Haven Zhang
             </h1>
             <h2 className="mt-5 text-xl font-semibold text-white/82 sm:text-2xl">
-              Full-Stack &amp; Mobile Developer
+              Full-Stack Software Developer
             </h2>
             <div className="mt-5 h-px w-full max-w-lg bg-white/12" />
             <p className="mt-6 max-w-lg text-base leading-8 text-white/58">
-              I build full-stack web and mobile applications with clean code, thoughtful UI/UX, and reliable backend systems.
+              Building scalable web applications with thoughtful UX and reliable backend services.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
@@ -228,6 +307,14 @@ export default function Home() {
                 className="inline-flex items-center gap-2 rounded-md border border-white/16 bg-white/[0.035] px-5 py-3 text-sm font-semibold text-white transition hover:border-white/30 hover:bg-white/[0.07]"
               >
                 Contact Me
+              </a>
+              <a
+                href="/Haven-Zhang-Resume.pdf"
+                download="Haven-Zhang-Resume.pdf"
+                className="inline-flex items-center gap-2 rounded-md border border-white/16 bg-white/[0.035] px-5 py-3 text-sm font-semibold text-white transition hover:border-violet-200/40 hover:bg-white/[0.07] hover:text-violet-100"
+              >
+                Resume
+                <Download size={17} />
               </a>
             </div>
             <div className="mt-8 flex flex-wrap gap-2.5">
@@ -250,9 +337,9 @@ export default function Home() {
           >
             <div className="relative">
               <div className="absolute inset-7 rounded-full bg-violet-300/18 blur-2xl" />
-              <div className="relative size-64 overflow-hidden rounded-full border border-white/15 bg-white/[0.04] shadow-[0_0_40px_rgba(168,139,250,0.18)] sm:size-72">
+              <div className="relative size-72 overflow-hidden rounded-full border border-white/15 bg-white/[0.04] shadow-[0_0_40px_rgba(168,139,250,0.18)] sm:size-80">
                 <Image
-                  src="/haven-web.png"
+                  src="/avatar2.jpg"
                   alt="Haven Zhang portrait"
                   fill
                   priority
@@ -265,7 +352,7 @@ export default function Home() {
           </motion.div>
         </section>
 
-        <section id="about" className="border-b border-white/10 py-16">
+        <section id="about" className="section-surface border-b border-white/10 py-16 [--section-bg:rgba(13,15,20,0.72)]">
           <div className="grid gap-10 xl:grid-cols-[0.88fr_1.12fr]">
             <motion.div
               variants={fadeUp}
@@ -313,33 +400,47 @@ export default function Home() {
               className="rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02))] p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.02)] sm:p-8"
             >
               <div className="rounded-[22px] border border-violet-200/12 bg-violet-300/[0.05] px-5 py-4 text-sm font-medium text-violet-100/90">
-                Full-stack and mobile developer focused on clean UI/UX, backend systems, and database-driven applications.
+                Full-stack developer building modern web applications with clean UI, reliable backend systems, and thoughtful user experiences.
               </div>
 
               <div className="mt-7 space-y-5 text-base leading-8 text-white/60">
                 <p>
-                  I&apos;m a full-stack and mobile developer based in the Vancouver area. My background combines 7+ years of enterprise software development experience on NEC-related client projects, hands-on software training at BCIT, and recent project experience building modern web and mobile applications.
+                  I&apos;m a full-stack software developer based in the Vancouver area. My background combines 7+ years of enterprise software development experience on NEC-related client projects, hands-on software training at BCIT, and recent project experience building modern web and mobile applications.
                 </p>
                 <p>
                   I enjoy turning complex requirements into clean interfaces, stable data flows, backend APIs, and applications that feel simple and reliable for users.
                 </p>
               </div>
 
-              <div className="mt-8 flex flex-wrap gap-3">
-                {skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm font-medium text-white/72"
-                  >
-                    {skill}
-                  </span>
+              <div className="mt-8 grid gap-x-6 gap-y-5 sm:grid-cols-2">
+                {skillGroups.map((group) => (
+                  <div key={group.category}>
+                    <p className="mb-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-violet-200/55">
+                      {group.category}
+                    </p>
+                    <div className="flex flex-wrap gap-2.5">
+                      {group.skills.map((skill) => {
+                        const SkillIcon = skill.icon;
+
+                        return (
+                          <span
+                            key={skill.name}
+                            className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm font-medium text-white/72"
+                          >
+                            <SkillIcon aria-hidden="true" className={`size-5 shrink-0 ${skill.color}`} />
+                            {skill.name}
+                          </span>
+                        );
+                      })}
+                    </div>
+                  </div>
                 ))}
               </div>
             </motion.div>
           </div>
         </section>
 
-        <section id="projects" className="border-b border-white/10 py-16">
+        <section id="projects" className="section-surface border-b border-white/10 py-16 [--section-bg:rgba(17,19,23,0.78)]">
           <SectionHeading
             label="Featured Projects"
             title="Selected work that connects clean UI, backend systems, and real user needs."
@@ -398,7 +499,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="experience" className="border-b border-white/10 py-16">
+        <section id="experience" className="section-surface border-b border-white/10 py-16 [--section-bg:rgba(15,17,21,0.72)]">
           <SectionHeading
             label="Experience"
             title="NEC, BCIT, and freelance work shaped how I build reliable web products."
@@ -461,7 +562,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="contact" className="py-16">
+        <section id="contact" className="section-surface py-16 [--section-bg:rgba(21,24,33,0.78)]">
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -495,6 +596,8 @@ export default function Home() {
               <div className="space-y-4">
                 <a
                   href="https://www.linkedin.com/in/haven-zhang"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group flex items-center justify-between rounded-2xl border border-white/12 bg-white/[0.03] px-5 py-5 text-base font-semibold text-white transition hover:border-white/24 hover:bg-white/[0.05]"
                 >
                   <span className="flex items-center gap-3">
@@ -505,6 +608,8 @@ export default function Home() {
                 </a>
                 <a
                   href="https://github.com/HavenZhangzr"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group flex items-center justify-between rounded-2xl border border-white/12 bg-white/[0.03] px-5 py-5 text-base font-semibold text-white transition hover:border-white/24 hover:bg-white/[0.05]"
                 >
                   <span className="flex items-center gap-3">
