@@ -7,8 +7,14 @@ export type Project = {
   type: string;
   summary: string;
   overview: string;
+  contributions?: {
+    title: string;
+    description: string;
+  }[];
   role: string[];
   stack: string[];
+  team?: string;
+  client?: string;
   duration: string;
   accent: string;
   previewImage?: string;
@@ -39,10 +45,38 @@ export const projects: Project[] = [
     title: "WorkSafeBC Fall Protection Plan",
     shortTitle: "Fall Protection Plan",
     type: "React Native, Expo, Node.js, Express, MongoDB, SQLite",
-    summary: "A guided planning workflow for generating, reviewing, sharing, and signing fall protection plans in a structured way.",
-    overview: "This project focuses on turning a safety-critical document workflow into a cleaner digital product. The app helps teams build a fall protection plan step by step, review the generated result, share it with stakeholders, and complete the sign-off flow with less friction.",
+    summary: "Digitizing fall protection planning for construction teams.",
+    overview: "A React Native application developed for WorkSafeBC to digitize fall protection planning workflows for construction teams.\n\nThe application streamlines multi-step form completion, offline data collection, PDF generation, review, sharing, and digital sign-off.",
+    contributions: [
+      {
+        title: "UI / UX Design",
+        description: "Designed the application layout, navigation flow, form experience, and overall user interface."
+      },
+      {
+        title: "Component Architecture",
+        description: "Built reusable React Native components, shared layouts, and maintainable UI architecture."
+      },
+      {
+        title: "Authentication",
+        description: "Implemented sign-in, sign-up, password recovery, and secure authentication flows."
+      },
+      {
+        title: "Workflow Features",
+        description: "Built the Site Details form, dashboard, PDF preview and sharing, and guided planning experience."
+      },
+      {
+        title: "Offline Support",
+        description: "Implemented SQLite offline queue and synchronization for reliable field usage."
+      },
+      {
+        title: "Integration & Quality",
+        description: "Performed integration testing, UI/UX refinement, and bug fixing across project modules."
+      }
+    ],
     role: ["Full-Stack Developer", "Product Designer"],
     stack: ["React Native", "Expo", "Node.js", "Express", "MongoDB", "SQLite"],
+    team: "5 Developers",
+    client: "WorkSafeBC",
     duration: "Jan 2026 – Apr 2026",
     accent: "from-emerald-300/65 via-cyan-300/55 to-sky-300/55",
     previewImage: "/FPP/fpp.png",
@@ -85,16 +119,28 @@ export const projects: Project[] = [
     ],
     features: [
       {
-        title: "Guided Plan Builder",
-        description: "A step-by-step workflow reduces confusion in a safety-critical documentation process."
+        title: "Multi-step Guided Workflow",
+        description: "Guides users through complex fall protection planning one structured step at a time."
+      },
+      {
+        title: "Offline Data Collection",
+        description: "Stores form progress locally so plans can be completed in areas with limited connectivity."
       },
       {
         title: "PDF Generation",
-        description: "Users can turn form inputs into a structured plan document that is easy to review and retain."
+        description: "Transforms completed form data into a structured document for review and record keeping."
       },
       {
-        title: "Share & Sign",
-        description: "Collaboration and sign-off features help move the plan from draft to approved document."
+        title: "Digital Sign-off",
+        description: "Supports a clear approval step for completed fall protection plans."
+      },
+      {
+        title: "Dashboard",
+        description: "Provides quick access to recent plans, progress states, and plan management actions."
+      },
+      {
+        title: "Plan Sharing",
+        description: "Enables completed plans and generated documents to be shared with project stakeholders."
       }
     ],
     highlights: [

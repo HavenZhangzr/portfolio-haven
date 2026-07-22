@@ -43,7 +43,7 @@ export function ProjectCarousel({ screenshots }: ProjectCarouselProps) {
       </button>
 
       <div className="relative z-10">
-        <div className="relative mx-auto aspect-[890/1682] w-[min(19rem,66vw)] overflow-hidden rounded-md bg-black shadow-[0_24px_70px_rgba(0,0,0,0.35)]">
+        <div className="relative mx-auto aspect-[890/1682] w-[min(20rem,70vw)] overflow-hidden rounded-md bg-black shadow-[0_24px_70px_rgba(0,0,0,0.35)]">
           <Image
             key={activeScreenshot.src}
             src={activeScreenshot.src}
@@ -51,7 +51,7 @@ export function ProjectCarousel({ screenshots }: ProjectCarouselProps) {
             fill
             priority
             className="object-cover"
-            sizes="(max-width: 768px) 66vw, 19rem"
+            sizes="(max-width: 768px) 70vw, 20rem"
           />
         </div>
         <div className="mt-2 flex h-4 items-center justify-center gap-2.5">

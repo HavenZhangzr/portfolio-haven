@@ -5,13 +5,21 @@ import {
   ArrowLeft,
   ArrowUpRight,
   BarChart3,
+  BadgeCheck,
+  Blocks,
   Bookmark,
   Check,
+  ClipboardList,
+  FileText,
   Github,
   Heart,
   MapPin,
   MessageCircle,
   Navigation,
+  LockKeyhole,
+  Palette,
+  Share2,
+  Smartphone,
   Sparkles,
   TriangleAlert,
   Users
@@ -266,7 +274,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   return (
     <main className="relative min-h-screen overflow-hidden">
       <div className="noise pointer-events-none absolute inset-0 opacity-60" />
-      <div className="relative z-10 mx-auto max-w-7xl px-5 py-8 sm:px-8">
+      <div className="relative z-10 mx-auto max-w-[1440px] px-5 py-8 sm:px-8">
         <Link
           href="/#projects"
           className="inline-flex items-center gap-2 text-sm font-medium text-white/55 transition hover:text-white"
@@ -275,7 +283,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           All Projects
         </Link>
 
-        <section className="grid gap-10 py-12 lg:grid-cols-[0.9fr_1.1fr_0.8fr]">
+        <section className="grid gap-10 py-12 xl:grid-cols-[0.85fr_1.05fr_1fr]">
           <div className="flex flex-col justify-center">
             <p className="mb-5 text-sm font-semibold uppercase text-violet-200/70">
               Featured Project
@@ -283,7 +291,25 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl">
               {project.title}
             </h1>
-            <p className="mt-7 text-base leading-8 text-white/62 whitespace-pre-line">{project.summary}</p>
+            <div className="mt-8">
+              <p className="mb-4 text-sm font-semibold uppercase text-white/45">
+                Project Overview
+              </p>
+              <div>
+                {project.overview.split("\n\n").map((paragraph, index) => (
+                  <p
+                    key={paragraph}
+                    className={
+                      index === 0
+                        ? "text-base font-medium leading-7 text-white/82"
+                        : "mt-3 text-sm leading-7 text-white/64"
+                    }
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </div>
             {/*
             <div className="mt-9 flex flex-wrap gap-3">
               {project.liveUrl ? (
@@ -304,25 +330,30 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               </a>
             </div>
             */}
-            <div className="mt-10 space-y-7">
-              {project.features.map((feature, index) => {
-                const icons = [Users, MapPin, Heart];
-                const Icon = icons[index] ?? Navigation;
+            <div className="mt-10">
+              <p className="mb-6 text-sm font-semibold uppercase text-white/45">
+                Core Features
+              </p>
+              <div className="space-y-7">
+                {project.features.map((feature, index) => {
+                  const icons = [Navigation, Bookmark, FileText, Check, BarChart3, Share2];
+                  const Icon = icons[index] ?? Sparkles;
 
-                return (
-                  <div key={feature.title} className="flex gap-5">
-                    <span className="grid size-12 shrink-0 place-items-center rounded-full bg-violet-300/10 text-violet-200">
-                      <Icon size={21} />
-                    </span>
-                    <div>
-                      <h2 className="font-semibold text-white">{feature.title}</h2>
-                      <p className="mt-2 text-sm leading-6 text-white/58">
-                        {feature.description}
-                      </p>
+                  return (
+                    <div key={feature.title} className="flex gap-5">
+                      <span className="grid size-12 shrink-0 place-items-center rounded-full bg-violet-300/10 text-violet-200">
+                        <Icon size={21} />
+                      </span>
+                      <div>
+                        <h2 className="font-semibold text-white">{feature.title}</h2>
+                        <p className="mt-2 text-sm leading-6 text-white/58">
+                          {feature.description}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
           </div>
 
@@ -330,21 +361,44 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <ProjectShowcase project={project} />
           </div>
 
-          <aside className="space-y-8 lg:pt-12">
-            <div>
-              <p className="mb-4 text-sm font-semibold uppercase text-white/45">
-                Project Overview
-              </p>
-              <p className="text-sm leading-7 text-white/64 whitespace-pre-line">{project.overview}</p>
-            </div>
-            <div>
-              <p className="mb-4 text-sm font-semibold uppercase text-white/45">My Role</p>
-              <div className="space-y-2 text-sm text-white/70">
-                {project.role.map((role) => (
-                  <p key={role}>{role}</p>
-                ))}
+          <aside className="w-full max-w-[400px] space-y-8 xl:pt-48">
+            {project.contributions ? (
+              <div className="w-full rounded-xl border border-violet-200/15 bg-violet-300/[0.045] p-5">
+                <p className="mb-5 text-sm font-semibold uppercase text-white/45">
+                  My Contributions
+                </p>
+                <div className="space-y-4">
+                  {project.contributions.map((contribution, index) => {
+                    const contributionIcons = [
+                      Palette,
+                      Blocks,
+                      LockKeyhole,
+                      ClipboardList,
+                      Smartphone,
+                      BadgeCheck
+                    ];
+                    const ContributionIcon = contributionIcons[index] ?? Check;
+
+                    return (
+                      <div key={contribution.title} className="flex gap-3 border-l border-violet-300/30 pl-4">
+                        <ContributionIcon
+                          size={17}
+                          className="mt-0.5 shrink-0 text-violet-200/80"
+                        />
+                        <div>
+                          <h3 className="text-sm font-semibold text-white/85">
+                            {contribution.title}
+                          </h3>
+                          <p className="mt-1 text-[13px] leading-5 text-white/56">
+                            {contribution.description}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
+            ) : null}
             <div>
               <p className="mb-4 text-sm font-semibold uppercase text-white/45">Tech Stack</p>
               <div className="flex flex-wrap gap-2">
@@ -358,24 +412,31 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 ))}
               </div>
             </div>
+            {project.team ? (
+              <div>
+                <p className="mb-4 text-sm font-semibold uppercase text-white/45">Team</p>
+                <p className="text-sm text-white/70">{project.team}</p>
+              </div>
+            ) : null}
+            {project.client ? (
+              <div>
+                <p className="mb-4 text-sm font-semibold uppercase text-white/45">Client</p>
+                <p className="text-sm text-white/70">{project.client}</p>
+              </div>
+            ) : null}
+            {!project.team && !project.client ? (
+              <div>
+                <p className="mb-4 text-sm font-semibold uppercase text-white/45">My Role</p>
+                <div className="space-y-2 text-sm text-white/70">
+                  {project.role.map((role) => (
+                    <p key={role}>{role}</p>
+                  ))}
+                </div>
+              </div>
+            ) : null}
             <div>
               <p className="mb-4 text-sm font-semibold uppercase text-white/45">Duration</p>
               <p className="text-sm text-white/70">{project.duration}</p>
-            </div>
-            <div className="rounded-lg border border-white/10 bg-white/[0.045] p-5">
-              <p className="mb-4 text-sm font-semibold uppercase text-white/45">
-                Key Highlights
-              </p>
-              <div className="space-y-3">
-                {project.highlights.map((item) => (
-                  <div key={item} className="flex gap-3 text-sm text-white/66">
-                    <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-violet-300/15 text-violet-200">
-                      <Check size={13} />
-                    </span>
-                    {item}
-                  </div>
-                ))}
-              </div>
             </div>
           </aside>
         </section>
