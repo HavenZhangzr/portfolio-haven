@@ -2,27 +2,41 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
+  Accessibility,
   ArrowLeft,
   ArrowUpRight,
   BarChart3,
   BadgeCheck,
+  BellRing,
   Blocks,
+  Bot,
   Bookmark,
+  BrainCircuit,
   Check,
   ClipboardList,
+  Code2,
   FileText,
   Github,
   Heart,
+  Map,
   MapPin,
   MessageCircle,
   Navigation,
+  Newspaper,
   LockKeyhole,
+  ListChecks,
+  Lightbulb,
+  LayoutDashboard,
   Palette,
+  PenTool,
+  ScanSearch,
+  Server,
   Share2,
   Smartphone,
   Sparkles,
   TriangleAlert,
-  Users
+  Users,
+  WifiOff
 } from "lucide-react";
 import { ProjectCarousel } from "@/components/project-carousel";
 import { ProjectDesktopShowcase } from "@/components/project-desktop-showcase";
@@ -283,14 +297,23 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           All Projects
         </Link>
 
-        <section className="grid gap-10 py-12 xl:grid-cols-[0.85fr_1.05fr_1fr]">
-          <div className="flex flex-col justify-center">
+        <section className="grid gap-10 py-12 xl:grid-cols-[0.85fr_1.05fr_400px]">
+          <div
+            className={`flex flex-col ${
+              project.slug === "finsight-ai" ? "justify-start" : "justify-center"
+            }`}
+          >
             <p className="mb-5 text-sm font-semibold uppercase text-violet-200/70">
               Featured Project
             </p>
-            <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl">
+            <h1 className="whitespace-pre-line text-4xl font-bold leading-tight text-white sm:text-5xl">
               {project.title}
             </h1>
+            {project.productSubtitle ? (
+              <p className="mt-3 text-lg font-medium leading-7 text-white/58 sm:text-xl">
+                {project.productSubtitle}
+              </p>
+            ) : null}
             <div className="mt-8">
               <p className="mb-4 text-sm font-semibold uppercase text-white/45">
                 Project Overview
@@ -310,6 +333,35 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 ))}
               </div>
             </div>
+            {project.slug === "finsight-ai" ? (
+              <>
+                <div className="mt-8">
+                  <p className="mb-4 text-sm font-semibold uppercase text-white/45">
+                    Tech Stack
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.stack.map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-md border border-white/12 bg-white/[0.045] px-3 py-2 text-sm text-white/66"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="mt-8">
+                  <p className="mb-4 text-sm font-semibold uppercase text-white/45">
+                    My Role
+                  </p>
+                  <div className="space-y-2 text-sm text-white/70">
+                    {project.role.map((role) => (
+                      <p key={role}>{role}</p>
+                    ))}
+                  </div>
+                </div>
+              </>
+            ) : null}
             {/*
             <div className="mt-9 flex flex-wrap gap-3">
               {project.liveUrl ? (
@@ -330,13 +382,21 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               </a>
             </div>
             */}
+            {project.slug !== "finsight-ai" ? (
             <div className="mt-10">
               <p className="mb-6 text-sm font-semibold uppercase text-white/45">
-                Core Features
+                Product Highlights
               </p>
               <div className="space-y-7">
                 {project.features.map((feature, index) => {
-                  const icons = [Navigation, Bookmark, FileText, Check, BarChart3, Share2];
+                  const icons =
+                    project.slug === "fall-protection-plan"
+                      ? [ScanSearch, Sparkles, PenTool, ListChecks, WifiOff, FileText]
+                      : project.slug === "pathpal"
+                        ? [Navigation, Map, MapPin, Newspaper, Share2, Bookmark]
+                        : project.slug === "finsight-ai"
+                          ? [LayoutDashboard, BrainCircuit, ScanSearch, BellRing, Lightbulb, Bot]
+                          : [Users, MapPin, Heart];
                   const Icon = icons[index] ?? Sparkles;
 
                   return (
@@ -355,13 +415,48 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 })}
               </div>
             </div>
+            ) : null}
           </div>
 
-          <div className="relative flex items-center justify-center">
+          <div className="relative flex items-start justify-center xl:pt-44">
             <ProjectShowcase project={project} />
           </div>
 
-          <aside className="w-full max-w-[400px] space-y-8 xl:pt-48">
+          <aside className="w-full max-w-[400px] space-y-8 xl:pt-44">
+            {project.slug === "finsight-ai" ? (
+              <div>
+                <p className="mb-6 text-sm font-semibold uppercase text-white/45">
+                  Product Highlights
+                </p>
+                <div className="space-y-7">
+                  {project.features.map((feature, index) => {
+                    const icons = [
+                      LayoutDashboard,
+                      BrainCircuit,
+                      ScanSearch,
+                      BellRing,
+                      Lightbulb,
+                      Bot
+                    ];
+                    const Icon = icons[index] ?? Sparkles;
+
+                    return (
+                      <div key={feature.title} className="flex gap-5">
+                        <span className="grid size-12 shrink-0 place-items-center rounded-full bg-violet-300/10 text-violet-200">
+                          <Icon size={21} />
+                        </span>
+                        <div>
+                          <h2 className="font-semibold text-white">{feature.title}</h2>
+                          <p className="mt-2 text-sm leading-6 text-white/58">
+                            {feature.description}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ) : null}
             {project.contributions ? (
               <div className="w-full rounded-xl border border-violet-200/15 bg-violet-300/[0.045] p-5">
                 <p className="mb-5 text-sm font-semibold uppercase text-white/45">
@@ -369,14 +464,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </p>
                 <div className="space-y-4">
                   {project.contributions.map((contribution, index) => {
-                    const contributionIcons = [
-                      Palette,
-                      Blocks,
-                      LockKeyhole,
-                      ClipboardList,
-                      Smartphone,
-                      BadgeCheck
-                    ];
+                    const contributionIcons =
+                      project.slug === "pathpal"
+                        ? [Palette, Code2, MessageCircle, Accessibility, Server, BadgeCheck]
+                        : [Palette, Blocks, LockKeyhole, ClipboardList, Smartphone, BadgeCheck];
                     const ContributionIcon = contributionIcons[index] ?? Check;
 
                     return (
@@ -399,6 +490,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </div>
               </div>
             ) : null}
+            {project.slug !== "finsight-ai" ? (
             <div>
               <p className="mb-4 text-sm font-semibold uppercase text-white/45">Tech Stack</p>
               <div className="flex flex-wrap gap-2">
@@ -412,6 +504,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 ))}
               </div>
             </div>
+            ) : null}
             {project.team ? (
               <div>
                 <p className="mb-4 text-sm font-semibold uppercase text-white/45">Team</p>
@@ -424,7 +517,24 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 <p className="text-sm text-white/70">{project.client}</p>
               </div>
             ) : null}
-            {!project.team && !project.client ? (
+            {project.appUrl ? (
+              <div>
+                <p className="mb-4 text-sm font-semibold uppercase text-white/45">App Link</p>
+                <a
+                  href={project.appUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-violet-200 transition hover:text-white"
+                >
+                  View Live App
+                  <ArrowUpRight size={16} />
+                </a>
+              </div>
+            ) : null}
+            {project.slug !== "finsight-ai" &&
+            !project.team &&
+            !project.client &&
+            !project.appUrl ? (
               <div>
                 <p className="mb-4 text-sm font-semibold uppercase text-white/45">My Role</p>
                 <div className="space-y-2 text-sm text-white/70">
@@ -434,10 +544,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </div>
               </div>
             ) : null}
-            <div>
-              <p className="mb-4 text-sm font-semibold uppercase text-white/45">Duration</p>
-              <p className="text-sm text-white/70">{project.duration}</p>
-            </div>
+            {project.duration ? (
+              <div>
+                <p className="mb-4 text-sm font-semibold uppercase text-white/45">Duration</p>
+                <p className="text-sm text-white/70">{project.duration}</p>
+              </div>
+            ) : null}
           </aside>
         </section>
 

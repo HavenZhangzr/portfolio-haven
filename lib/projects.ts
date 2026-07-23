@@ -3,6 +3,7 @@ export type Project = {
   slug: string;
   showcaseStyle?: "mobile" | "desktop";
   title: string;
+  productSubtitle?: string;
   shortTitle: string;
   type: string;
   summary: string;
@@ -15,7 +16,8 @@ export type Project = {
   stack: string[];
   team?: string;
   client?: string;
-  duration: string;
+  appUrl?: string;
+  duration?: string;
   accent: string;
   previewImage?: string;
   cardHref?: string;
@@ -75,7 +77,7 @@ export const projects: Project[] = [
     ],
     role: ["Full-Stack Developer", "Product Designer"],
     stack: ["React Native", "Expo", "Node.js", "Express", "MongoDB", "SQLite"],
-    team: "5 Developers",
+    team: "4 Developers",
     client: "WorkSafeBC",
     duration: "Jan 2026 – Apr 2026",
     accent: "from-emerald-300/65 via-cyan-300/55 to-sky-300/55",
@@ -119,28 +121,28 @@ export const projects: Project[] = [
     ],
     features: [
       {
-        title: "Multi-step Guided Workflow",
-        description: "Guides users through complex fall protection planning one structured step at a time."
+        title: "AI Hazard Detection",
+        description: "Detects construction hazards from uploaded site images using Roboflow computer vision."
       },
       {
-        title: "Offline Data Collection",
-        description: "Stores form progress locally so plans can be completed in areas with limited connectivity."
+        title: "AI Rescue Suggestions",
+        description: "Generates contextual rescue recommendations with Gemini AI."
       },
       {
-        title: "PDF Generation",
-        description: "Transforms completed form data into a structured document for review and record keeping."
+        title: "Worksite Canvas",
+        description: "Provides interactive site diagrams for planning hazards and work zones."
       },
       {
-        title: "Digital Sign-off",
-        description: "Supports a clear approval step for completed fall protection plans."
+        title: "Guided Planning Workflow",
+        description: "Guides users through fall protection planning one structured step at a time."
       },
       {
-        title: "Dashboard",
-        description: "Provides quick access to recent plans, progress states, and plan management actions."
+        title: "Offline Support",
+        description: "Stores work locally and synchronizes data when connectivity is restored."
       },
       {
-        title: "Plan Sharing",
-        description: "Enables completed plans and generated documents to be shared with project stakeholders."
+        title: "PDF Review & Sign-off",
+        description: "Generates structured PDF plans for review, approval, and digital sign-off."
       }
     ],
     highlights: [
@@ -170,13 +172,42 @@ export const projects: Project[] = [
   {
     displayOrder: 2,
     slug: "pathpal",
-    title: "PathPal - Community Discovery Web App",
+    title: "PathPal",
+    productSubtitle: "Accessible Navigation & Community Platform",
     shortTitle: "PathPal",
     type: "HTML, JS, Express, Node.js, MongoDB",
     summary: "A location-based web app for sharing real-time updates, discovering nearby places, and connecting with local communities.",
-    overview: "PathPal is a community discovery web app that helps users share updates, explore nearby places, and interact around local experiences. It combines real-time posting, map-based discovery, and lightweight social features in a browser-based product experience.",
+    overview: "PathPal is an accessibility-focused community platform that helps wheelchair users, seniors, and other mobility-conscious travelers navigate cities with confidence.\n\nThe platform combines accessible route planning, interactive maps, accessibility POIs, favorites, and community-driven content into a seamless experience for discovering, sharing, and managing accessibility information.",
+    contributions: [
+      {
+        title: "Product Design",
+        description: "Designed the application's UX, page layouts, navigation flow, and overall interface."
+      },
+      {
+        title: "Frontend Development",
+        description: "Built the majority of application features, pages, and reusable UI components."
+      },
+      {
+        title: "Community Features",
+        description: "Implemented posts, announcements, favorites, profile management, and social interactions."
+      },
+      {
+        title: "Accessibility Features",
+        description: "Developed accessibility POIs, saved routes, and accessibility-related user workflows."
+      },
+      {
+        title: "Backend Integration",
+        description: "Integrated REST APIs, authentication, and MongoDB data operations."
+      },
+      {
+        title: "Quality Assurance",
+        description: "Performed integration testing, UI refinement, and bug fixing."
+      }
+    ],
     role: ["Full-Stack Developer", "Product Designer"],
-    stack: ["HTML", "JS", "Express", "Node.js", "MongoDB"],
+    stack: ["HTML", "JS", "Mapbox", "Express", "Node.js", "MongoDB"],
+    team: "5 Members",
+    appUrl: "https://pathpal-zo0r.onrender.com",
     duration: "Apr 2025 – May 2025",
     accent: "from-violet-300/75 via-blue-300/50 to-cyan-300/60",
     previewImage: "/pathPal/pathPal.png",
@@ -214,16 +245,28 @@ export const projects: Project[] = [
     ],
     features: [
       {
-        title: "Real-time Sharing",
-        description: "Users can share updates with photos, locations, and short posts in real time through a streamlined web interface."
+        title: "Accessible Route Planning",
+        description: "Generates accessible routes for Driving, Walking, Senior, and Wheelchair users with turn-by-turn navigation."
       },
       {
-        title: "Discover Nearby",
-        description: "Location-aware discovery helps users browse nearby places and community activity in a more interactive map experience."
+        title: "Interactive Accessibility Map",
+        description: "Displays accessibility-aware routes, nearby facilities, and user-contributed locations on an interactive map."
       },
       {
-        title: "Engage & Connect",
-        description: "Likes, comments, bookmarks, and profile features support lightweight community interaction across the app."
+        title: "Accessibility POIs",
+        description: "Users can create, edit, and share accessibility Points of Interest such as ramps, elevators, benches, and accessible facilities."
+      },
+      {
+        title: "Community Feed",
+        description: "Browse community posts, accessibility places, and announcements in one central feed."
+      },
+      {
+        title: "Community Sharing",
+        description: "Share accessibility updates, recommendations, and local experiences with the community."
+      },
+      {
+        title: "Saved Routes",
+        description: "Save frequently used routes for quick access and future navigation."
       }
     ],
     highlights: [
@@ -248,7 +291,7 @@ export const projects: Project[] = [
       "Built a foundation that can expand into richer place recommendations and community features."
     ],
     githubUrl: "https://github.com",
-    liveUrl: "https://example.com"
+    liveUrl: "https://pathpal-zo0r.onrender.com"
   },
   {
     displayOrder: 3,
@@ -258,10 +301,9 @@ export const projects: Project[] = [
     shortTitle: "FinSight AI",
     type: "React, .NET 8, OpenAI API, SQLite",
     summary: "A two-page AI-powered prototype that turns financial data, anomaly alerts, and expense trends into clear explanations and actionable recommendations.",
-    overview: "FinSight AI is an AI-powered financial insight prototype designed to help small business users understand financial data more easily. Instead of only displaying charts or transaction records, the system explains what happened, why it may have happened, and what actions users can take.\n\nThe prototype focuses on dashboard-level and alert-level AI analysis, demonstrating how anomaly detection, smart alerts, and AI-generated recommendations can support better financial decision-making.",
-    role: ["Full-Stack Developer", "AI Integration", "Prototype Designer"],
+    overview: "FinSight AI is an AI-powered financial analysis prototype that helps small businesses understand financial performance beyond charts and spreadsheets.\n\nInstead of only visualizing transactions, the system combines anomaly detection, AI-generated explanations, and actionable recommendations to transform financial data into meaningful business insights.",
+    role: ["Personal Project", "Full-Stack Developer", "AI Product Designer"],
     stack: ["React", "Vite", "MUI", ".NET 8", "OpenAI API", "ML.NET", "SQLite"],
-    duration: "Apr 2026 - Personal Project Prototype",
     accent: "from-emerald-300/60 via-sky-300/55 to-cyan-300/55",
     previewImage: "/FinSight/01-dashborad.png",
     liveLabel: "View Prototype",
@@ -284,16 +326,28 @@ export const projects: Project[] = [
     ],
     features: [
       {
-        title: "AI Financial Insights",
-        description: "Generates structured explanations to help users understand spending changes, unusual patterns, and key financial issues."
+        title: "Interactive Dashboard",
+        description: "Visualizes business metrics, trends, and AI insights in one place."
       },
       {
-        title: "Smart Alert Analysis",
-        description: "Highlights abnormal expense patterns with severity levels and contextual financial insights."
+        title: "AI Financial Analysis",
+        description: "Explains spending trends, anomalies, and business performance using natural language."
       },
       {
-        title: "Actionable Suggestions",
-        description: "Transforms raw financial data into summaries, possible causes, and suggested actions for better business decisions."
+        title: "Anomaly Detection",
+        description: "Detects unusual financial patterns using ML.NET and statistical analysis."
+      },
+      {
+        title: "Smart Alerts",
+        description: "Prioritizes important financial events with severity levels and contextual explanations."
+      },
+      {
+        title: "AI Recommendations",
+        description: "Suggests practical actions to reduce costs or improve financial health."
+      },
+      {
+        title: "AI Assistant",
+        description: "Enables users to ask financial questions and receive contextual AI insights."
       }
     ],
     highlights: [
