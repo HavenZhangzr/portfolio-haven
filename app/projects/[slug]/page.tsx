@@ -418,11 +418,19 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             ) : null}
           </div>
 
-          <div className="relative flex items-start justify-center xl:pt-44">
+          <div
+            className={`relative flex items-start justify-center ${
+              project.slug === "finsight-ai" ? "xl:pt-28" : "xl:pt-44"
+            }`}
+          >
             <ProjectShowcase project={project} />
           </div>
 
-          <aside className="w-full max-w-[400px] space-y-8 xl:pt-44">
+          <aside
+            className={`w-full max-w-[400px] space-y-8 ${
+              project.slug === "finsight-ai" ? "xl:pt-28" : "xl:pt-44"
+            }`}
+          >
             {project.slug === "finsight-ai" ? (
               <div>
                 <p className="mb-6 text-sm font-semibold uppercase text-white/45">

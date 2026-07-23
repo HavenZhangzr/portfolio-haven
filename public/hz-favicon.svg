@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">HZ favicon</title>
+  <desc id="desc">Dark rounded-square favicon with a white H and lavender Z.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#232634"/>
+      <stop offset="100%" stop-color="#0E1018"/>
+    </linearGradient>
+    <linearGradient id="zGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#DDD6FE"/>
+      <stop offset="100%" stop-color="#9B87F5"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="12" y="12" width="488" height="488" rx="104" fill="url(#bg)"/>
+
+  <path fill="#FFFFFF" d="
+    M118 142
+    H164
+    V236
+    H232
+    V142
+    H278
+    V370
+    H232
+    V278
+    H164
+    V370
+    H118
+    Z"/>
+
+  <path fill="url(#zGrad)" d="
+    M292 142
+    H408
+    V181
+    L338 331
+    H408
+    V370
+    H286
+    V334
+    L357 181
+    H292
+    Z"/>
+</svg>

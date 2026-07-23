@@ -44,7 +44,8 @@ export const projects: Project[] = [
   {
     displayOrder: 1,
     slug: "fall-protection-plan",
-    title: "WorkSafeBC Fall Protection Plan",
+    title: "Fall Protection Plan",
+    productSubtitle: "Developed for WorkSafeBC",
     shortTitle: "Fall Protection Plan",
     type: "React Native, Expo, Node.js, Express, MongoDB, SQLite",
     summary: "Digitizing fall protection planning for construction teams.",
