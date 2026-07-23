@@ -10,13 +10,11 @@ import {
   BriefcaseBusiness,
   Database,
   Download,
-  Github,
   GraduationCap,
+  Handshake,
   Linkedin,
-  Lock,
   MapPin,
-  Monitor,
-  ShieldCheck
+  Monitor
 } from "lucide-react";
 import {
   SiDocker,
@@ -97,28 +95,31 @@ const experience = [
   {
     title: "Freelance Studio",
     place: "Founding Team Member",
-    period: "Now",
+    period: "2026–Present",
+    location: "Remote · Canada",
     icon: BriefcaseBusiness,
     detail: "Collaborating on modern web applications, portfolio projects, and client-ready solutions.",
     image: "/SFS.jpg",
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Firebase"],
     linkLabel: "Visit Studio",
     linkHref: "https://systemforge-studio.github.io/systemforge-website/",
-    current: true
+    current: false
   },
   {
     title: "BCIT CST",
     place: "Computer Systems Technology",
-    period: "Vancouver, Canada",
+    period: "2024–2026",
+    location: "Vancouver, Canada",
     icon: GraduationCap,
     detail: "Hands-on education across software development, databases, networking, and systems. Completed multiple full-stack projects in team environments.",
     image: "/BCIT.jpeg",
     tags: ["JavaScript", "React", "Node.js", "MySQL", "Git"]
   },
   {
-    title: "NEC Projects",
-    place: "Enterprise Software Experience",
-    period: "China",
+    title: "NEC Corporation",
+    place: "Software Engineer",
+    period: "2011–2019",
+    location: "Dalian, China",
     icon: Monitor,
     detail: "Worked on enterprise systems for NEC clients through a China-based outsourcing company. Focused on web development, testing workflows, and long-term system maintenance.",
     image: "/NEC.webp",
@@ -502,7 +503,7 @@ export default function Home() {
         <section id="experience" className="section-surface border-b border-white/10 py-16 [--section-bg:rgba(15,17,21,0.72)]">
           <SectionHeading
             label="Experience"
-            title="NEC, BCIT, and freelance work shaped how I build reliable web products."
+            title="Enterprise engineering, BCIT, and startup collaboration shaped my approach to building reliable software."
           />
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {experience.map((item, index) => {
@@ -516,7 +517,7 @@ export default function Home() {
                   whileInView="visible"
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.5, delay: index * 0.08, ease: "easeOut" }}
-                  className="rounded-[22px] border border-white/10 bg-white/[0.035] p-4 sm:p-5"
+                  className="flex flex-col rounded-[22px] border border-white/10 bg-white/[0.035] p-4 sm:p-5"
                 >
                   <div className="mb-4 flex items-start justify-between gap-4">
                     <span className="grid size-10 place-items-center rounded-md text-violet-200">
@@ -556,6 +557,15 @@ export default function Home() {
                     </a>
                   ) : null}
 
+                  {item.location ? (
+                    <div className="mt-auto flex justify-end pt-6">
+                      <span className="inline-flex items-center gap-2 text-xs text-white/46 sm:text-sm">
+                        <MapPin size={15} className="text-violet-300/70" />
+                        {item.location}
+                      </span>
+                    </div>
+                  ) : null}
+
                 </motion.article>
               );
             })}
@@ -587,10 +597,6 @@ export default function Home() {
                 <p className="mt-6 max-w-2xl text-lg leading-8 text-white/54">
                   Open to full-stack, mobile, and backend development opportunities.
                 </p>
-                <div className="mt-10 inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4 text-sm text-white/68">
-                  <ShieldCheck size={18} className="text-violet-300" />
-                  Privacy-conscious contact options
-                </div>
               </div>
 
               <div className="space-y-4">
@@ -598,29 +604,60 @@ export default function Home() {
                   href="https://www.linkedin.com/in/haven-zhang"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center justify-between rounded-2xl border border-white/12 bg-white/[0.03] px-5 py-5 text-base font-semibold text-white transition hover:border-white/24 hover:bg-white/[0.05]"
+                  className="group flex items-center justify-between rounded-2xl border border-white/12 bg-white/[0.03] px-5 py-5 text-base font-semibold text-white transition-all duration-300 ease-out hover:-translate-y-0.5 hover:scale-[1.01] hover:border-violet-300/50 hover:bg-white/[0.05] hover:shadow-[0_0_24px_rgba(120,80,255,0.15)]"
                 >
-                  <span className="flex items-center gap-3">
-                    <Linkedin size={20} />
-                    LinkedIn
+                  <span className="flex items-center gap-3.5">
+                    <Linkedin
+                      size={20}
+                      className="transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <span>
+                      <span className="block">LinkedIn</span>
+                      <span className="mt-0.5 block text-xs font-normal text-white/35 transition-colors duration-300 group-hover:text-white/60">
+                        Professional profile
+                      </span>
+                    </span>
                   </span>
-                  <ArrowRight size={20} className="transition group-hover:translate-x-1" />
+                  <ArrowRight
+                    size={20}
+                    className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-1.5 group-hover:-rotate-45"
+                  />
                 </a>
                 <a
-                  href="https://github.com/HavenZhangzr"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center justify-between rounded-2xl border border-white/12 bg-white/[0.03] px-5 py-5 text-base font-semibold text-white transition hover:border-white/24 hover:bg-white/[0.05]"
+                  href="/Haven-Zhang-Resume.pdf"
+                  download="Haven-Zhang-Resume.pdf"
+                  className="group flex items-center justify-between rounded-2xl border border-white/12 bg-white/[0.03] px-5 py-5 text-base font-semibold text-white transition-all duration-300 ease-out hover:-translate-y-0.5 hover:scale-[1.01] hover:border-violet-300/50 hover:bg-white/[0.05] hover:shadow-[0_0_24px_rgba(120,80,255,0.15)]"
                 >
-                  <span className="flex items-center gap-3">
-                    <Github size={20} />
-                    GitHub
+                  <span className="flex items-center gap-3.5">
+                    <Download
+                      size={20}
+                      className="transition-transform duration-300 group-hover:-rotate-[8deg] group-hover:scale-105"
+                    />
+                    <span>
+                      <span className="block">Resume</span>
+                      <span className="mt-0.5 block text-xs font-normal text-white/35 transition-colors duration-300 group-hover:text-white/60">
+                        Download PDF
+                      </span>
+                    </span>
                   </span>
-                  <ArrowRight size={20} className="transition group-hover:translate-x-1" />
+                  <ArrowRight
+                    size={20}
+                    className="transition-transform duration-300 group-hover:translate-x-1.5"
+                  />
                 </a>
-                <div className="flex items-start gap-3 pt-2 text-sm leading-6 text-white/46">
-                  <Lock size={16} className="mt-1 shrink-0 text-violet-300" />
-                  Your privacy matters. I review and respond to all messages personally.
+                <div className="space-y-2 pt-2 text-sm text-white/58">
+                  <div className="flex items-center gap-3">
+                    <BriefcaseBusiness size={16} className="shrink-0 text-violet-300" />
+                    Available for Full-Stack Roles
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Handshake size={16} className="shrink-0 text-violet-300" />
+                    Open to Contract Projects
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <MapPin size={16} className="shrink-0 text-violet-300" />
+                    Based in Vancouver
+                  </div>
                 </div>
               </div>
             </div>
