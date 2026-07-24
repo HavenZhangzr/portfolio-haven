@@ -102,7 +102,7 @@ const experience = [
     image: "/SFS.jpg",
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Firebase"],
     linkLabel: "Visit Studio",
-    linkHref: "https://systemforge-studio.github.io/systemforge-website/",
+    linkHref: "https://www.sysforge.ca/",
     current: false
   },
   {
